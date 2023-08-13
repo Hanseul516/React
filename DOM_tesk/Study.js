@@ -1,6 +1,6 @@
 const itemListStudy = [
   { no: 1, todo: "React", done: false },
-  { no: 2, todo: "Node.js", done: true },
+  { no: 2, todo: "Node.js", done: false },
   { no: 3, todo: "Javascript", done: false },
 ];
 
@@ -42,12 +42,11 @@ itemListStudy.forEach((item) => {
 
 function addItemStudy() {
   // 데이터 갱신
-  const inputElementStudy = document.querySelector("#todoinput input");
+  const inputElementStudy = document.querySelector("#todoinputStudy input");
   const itemStudy = {
     no: nextNoStudy,
     todo: inputElementStudy.value,
     done: false,
-    // done: false
   };
 
   itemListStudy.push(itemStudy);
@@ -61,7 +60,7 @@ function addItemStudy() {
 }
 
 function deleteItemStudy(event) {
-  const noStudy = Number(event.target.parentNode.dataset.key); // 삭제할 아이템의 번호
+  const noStudy = Number(event.target.parentNode.dataset.key);
 
   // 데이터 갱신
   const index = itemListStudy.findIndex((item) => item.no === noStudy);
@@ -73,7 +72,7 @@ function deleteItemStudy(event) {
 }
 
 function toggleDoneStudy(event) {
-  const noStudy = Number(event.target.parentNode.dataset.key); // 삭제할 아이템의 번호
+  const noStudy = Number(event.target.parentNode.dataset.key);
 
   // 데이터 갱신
   const indexStudy = itemListStudy.findIndex(

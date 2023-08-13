@@ -1,0 +1,55 @@
+body {
+  font-family: Arial, sans-serif;
+  color: #8785a2;
+}
+#root {
+  margin: 20px;
+}
+h1 {
+  text-align: center;
+  color: #8785a2;
+}
+#root > div {
+  margin-bottom: 20px;
+  border: 1px solid #ffe2e2;
+  padding: 10px;
+  background-color: #f6f6f6;
+}
+#root > div > div:nth-child(1) {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+#todoinput input,
+#todoinputCine input,
+#todoinputStudy input {
+  padding: 5px;
+  border: 1px solid #ffe2e2;
+  border-radius: 5px;
+}
+#todoinput span,
+#todoinputCine span,
+#todoinputStudy span {
+  margin-left: 5px;
+  padding: 5px 10px;
+  background-color: #ffc7c7;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 5px;
+}
+ul {
+  list-style: none;
+  padding: 0;
+}
+li {
+  margin: 5px 0;
+}
+span[onclick] {
+  cursor: pointer;
+  margin-left: 5px;
+}
+span[onclick]:hover {
+  text-decoration: underline;
+}
+span[onclick].done {
+  text-decoration: line-through;
+}

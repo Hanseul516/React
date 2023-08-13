@@ -1,6 +1,6 @@
 const itemListCine = [
   { no: 1, todo: "어벤져스", done: false },
-  { no: 2, todo: "다크나이트", done: true },
+  { no: 2, todo: "다크나이트", done: false },
   { no: 3, todo: "미션임파서블", done: false },
 ];
 
@@ -42,7 +42,7 @@ itemListCine.forEach((item) => {
 
 function addItemCine() {
   // 데이터 갱신
-  const inputElementCine = document.querySelector("#todoinput input");
+  const inputElementCine = document.querySelector("#todoinputCine input");
   const itemCine = {
     no: nextNoCine,
     todo: inputElementCine.value,
@@ -60,7 +60,7 @@ function addItemCine() {
 }
 
 function deleteItemCine(event) {
-  const noCine = Number(event.target.parentNode.dataset.key); // 삭제할 아이템의 번호
+  const noCine = Number(event.target.parentNode.dataset.key);
 
   // 데이터 갱신
   const index = itemListCine.findIndex((item) => item.no === noCine);
