@@ -1,0 +1,19 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "checked": false,
+      "item": "솔티트 캬라멜 라떼"
+    },
+    {
+      "id": 2,
+      "checked": false,
+      "item": "더블 포테이토 피자"
+    },
+    {
+      "id": 3,
+      "checked": false,
+      "item": "대파 크림치즈 베이글"
+    }
+  ]
+}
