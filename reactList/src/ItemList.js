@@ -11,7 +11,7 @@ const ItemList = ({ items, handleCheck, handleDelete }) => {
                     handleDelete={handleDelete} />
             ))}
         </ul>
-    )
+    );
 }
 
-export default ItemList
+export default ItemList;

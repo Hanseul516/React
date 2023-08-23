@@ -7,7 +7,8 @@ const Content = ({ items, handleCheck, handleDelete }) => {
         <ItemList
           items={items}
           handleCheck={handleCheck}
-          handleDelete={handleDelete} />
+          handleDelete={handleDelete}
+        />
       ) : (
         <p style={{ marginTop: "2em" }}>리스트가 비었습니다.</p>
       )}

@@ -11,7 +11,7 @@ const SearchItem = ({ search, setSearch }) => {
                 onChange={(e) => setSearch(e.target.value)}
             />
         </form>
-    )
-}
+    );
+};
 
-export default SearchItem
+export default SearchItem;
