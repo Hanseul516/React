@@ -1,8 +1,8 @@
 const ListItem = ({ item }) => {
   return (
-      <li>
-          {JSON.stringify(item)}
-      </li>
+    <li>
+      {JSON.stringify(item)}
+    </li>
   )
 }
 
