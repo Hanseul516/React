@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from './Header';
 import Nav from './Nav';
 import Footer from './Footer';
@@ -10,9 +10,10 @@ import Missing from './Missing';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
+  const [search, setSearch] = useState('')
   return (
     <div className='App'>
-      <Header />
+      <Header title="React JS Blog" />
       <Nav />
       <Routes>
         <Route exact path='/' element={<Home />} />
