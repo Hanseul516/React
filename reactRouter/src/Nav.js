@@ -21,4 +21,4 @@ const Nav = ({ search, setSearch }) => {
     )
 }
 
-export default Nav
+export default Nav;
