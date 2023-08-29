@@ -6,8 +6,9 @@ import NewPost from './NewPost';
 import PostPage from './PostPage';
 import About from './About';
 import Missing from './Missing';
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import React, { useState, useEffect } from 'react';
+import { Route, Switch, useHistory } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { format } from 'date-fns';
 
 function App() {
   const [posts, setPosts] = useState([
@@ -34,22 +35,63 @@ function App() {
       title: "My Fourth Post",
       datetime: "July 01, 2021 11:17:36 AM",
       body: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis consequatur expedita, assumenda similique non optio! Modi nesciunt excepturi corrupti atque blanditiis quo nobis, non optio quae possimus illum exercitationem ipsa!"
-    }])
+    }
+  ])
+  const [search, setSearch] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+  const [postTitle, setPostTitle] = useState('');
+  const [postBody, setPostBody] = useState('');
+  const history = useHistory();
 
-  const [search, setSearch] = useState('')
+  useEffect(() => {
+    const filteredResults = posts.filter((post) =>
+      ((post.body).toLowerCase()).includes(search.toLowerCase())
+      || ((post.title).toLowerCase()).includes(search.toLowerCase()));
+
+    setSearchResults(filteredResults.reverse());
+  }, [posts, search])
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const id = posts.length ? posts[posts.length - 1].id + 1 : 1;
+    const datetime = format(new Date(), 'MMMM dd, yyyy pp');
+    const newPost = { id, title: postTitle, datetime, body: postBody };
+    const allPosts = [...posts, newPost];
+    setPosts(allPosts);
+    setPostTitle('');
+    setPostBody('');
+    history.push('/');
+  }
+
+  const handleDelete = (id) => {
+    const postsList = posts.filter(post => post.id !== id);
+    setPosts(postsList);
+    history.push('/');
+  }
 
   return (
-    <div className='App'>
+    <div className="App">
       <Header title="React JS Blog" />
-      <Nav />
-      <Routes>
-        <Route exact path='/' element={<Home />} />
-        <Route exact path='/post' element={<NewPost />} />
-        <Route path='/post/:id' element={<PostPage />} />
-        <Route path='/about' element={<About />} />
-        {/* 라우트가 일치하지 않을 때의 처리는 아래와 같이 수정할 수 있습니다. */}
-        <Route path='*' element={<Missing />} />
-      </Routes>
+      <Nav search={search} setSearch={setSearch} />
+      <Switch>
+        <Route exact path="/">
+          <Home posts={searchResults} />
+        </Route>
+        <Route exact path="/post">
+          <NewPost
+            handleSubmit={handleSubmit}
+            postTitle={postTitle}
+            setPostTitle={setPostTitle}
+            postBody={postBody}
+            setPostBody={setPostBody}
+          />
+        </Route>
+        <Route path="/post/:id">
+          <PostPage posts={posts} handleDelete={handleDelete} />
+        </Route>
+        <Route path="/about" component={About} />
+        <Route path="*" component={Missing} />
+      </Switch>
       <Footer />
     </div>
   );
