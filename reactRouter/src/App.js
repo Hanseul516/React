@@ -1,13 +1,13 @@
-import Header from './Header';
-import Nav from './Nav';
-import Footer from './Footer';
+import React, { useState, useEffect } from 'react';
+import { useParams, Link, Routes, Route, useNavigate } from 'react-router-dom';
+import { format } from 'date-fns';
+import Layout from './Layout';
 import Home from './Home';
 import NewPost from './NewPost';
 import PostPage from './PostPage';
 import About from './About';
 import Missing from './Missing';
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import React, { useState, useEffect } from 'react';
+
 
 function App() {
   const [posts, setPosts] = useState([
@@ -34,24 +34,62 @@ function App() {
       title: "My Fourth Post",
       datetime: "July 01, 2021 11:17:36 AM",
       body: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis consequatur expedita, assumenda similique non optio! Modi nesciunt excepturi corrupti atque blanditiis quo nobis, non optio quae possimus illum exercitationem ipsa!"
-    }])
-
-  const [search, setSearch] = useState('')
+    }
+  ])
+  const [search, setSearch] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+  const [postTitle, setPostTitle] = useState('');
+  const [postBody, setPostBody] = useState('');
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const filteredResults = posts.filter((post) =>
+      post.body.toLowerCase().includes(search.toLowerCase()) ||
+      post.title.toLowerCase().includes(search.toLowerCase())
+    );
+
+    setSearchResults(filteredResults.reverse());
+  }, [posts, search]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const id = posts.length ? posts[posts.length - 1].id + 1 : 1;
+    const datetime = format(new Date(), 'MMMM dd, yyyy pp');
+    const newPost = { id, title: postTitle, datetime, body: postBody };
+    const allPosts = [...posts, newPost];
+    setPosts(allPosts);
+    setPostTitle('');
+    setPostBody('');
+    navigate('/');
+  }
+
+  const handleDelete = (id) => {
+    const postsList = posts.filter(post => post.id !== id);
+    setPosts(postsList);
+    navigate('/');
+  }
 
   return (
-    <div className='App'>
-      <Header title="React DS Blog" />
-      <Nav search={search} setSearch={setSearch} />
-      <Routes>
-        <Route exact path='/' element={<Home posts={posts} />} />
-        <Route exact path='/post' element={<NewPost />} />
-        <Route path='/post/:id' element={<PostPage />} />
-        <Route path='/about' element={<About />} />
-        <Route path='*' element={<Missing />} />
-      </Routes>
-      <Footer />
-    </div>
+    <Routes>
+      <Route path="/" element={<Layout search={search} setSearch={setSearch} />}>
+        <Route index element={<Home posts={searchResults} />} />
+        <Route path="post">
+          <Route index element={<NewPost
+            handleSubmit={handleSubmit}
+            postTitle={postTitle}
+            setPostTitle={setPostTitle}
+            postBody={postBody}
+            setPostBody={setPostBody}
+          />} />
+          <Route path=":id" element={<PostPage
+            posts={posts}
+            handleDelete={handleDelete}
+          />} />
+        </Route>
+        <Route path="about" element={<About />} />
+        <Route path="*" element={<Missing />} />
+      </Route>
+    </Routes>
   );
 }
 
