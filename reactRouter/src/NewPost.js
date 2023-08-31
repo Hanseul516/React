@@ -1,5 +1,5 @@
 import React from 'react'
-import { handleSubmit } from './App'; 
+import { handleSubmit } from './App';
 
 const NewPost = ({ handleSubmit, postTitle, setPostTitle, postBody, setPostBody }) => {
     return (
@@ -12,13 +12,13 @@ const NewPost = ({ handleSubmit, postTitle, setPostTitle, postBody, setPostBody 
                     type='text'
                     required
                     value={postTitle}
-                    onChange={(e) => setPostTitle(e.target.value)}/>
+                    onChange={(e) => setPostTitle(e.target.value)} />
                 <label htmlFor='postBody'>내용:</label>
                 <textarea
                     id='postBody'
                     required
                     value={postBody}
-                    onChange={(e)=> setPostBody(e.target.value)}/>
+                    onChange={(e) => setPostBody(e.target.value)} />
                 <button type='submit'>확인</button>
             </form>
         </main>

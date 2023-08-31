@@ -10,7 +10,6 @@ const Home = ({ posts }) => {
                     표시할 게시물이 없습니다.
                 </p>
             )}
-            <h1>Home</h1>
         </main>
     )
 }
