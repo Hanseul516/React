@@ -17,7 +17,7 @@ const PostPage = ({ posts, handleDelete }) => {
                 {!post &&
                     <>
                         <h2>게시물을 찾을 수 없습니다.</h2>
-                        <p>아쉬워요ㅠㅠ</p>
+                        <p>넘 아쉬워요ㅠㅠ</p>
                         <p>
                             <Link to='/'>홈페이지에 방문하세요.</Link>
                         </p>
