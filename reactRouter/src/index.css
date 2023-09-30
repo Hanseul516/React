@@ -92,7 +92,7 @@ body {
 }
 
 .Nav ul {
-  color: #fff;
+  color: white;
   list-style-type: none;
   display: flex;
   flex-wrap: nowrap;
