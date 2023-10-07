@@ -251,7 +251,7 @@ body {
   .Nav li:focus,
   .Nav li:hover a,
   .Nav li:focus a {
-    background-color: #Fff;
+    background-color: white;
     color: #333;
   }
 
