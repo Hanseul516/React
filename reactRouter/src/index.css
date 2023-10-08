@@ -252,7 +252,7 @@ body {
   .Nav li:hover a,
   .Nav li:focus a {
     background-color: white;
-    color: #333;
+    color: gray;
   }
 
   .searchForm {
